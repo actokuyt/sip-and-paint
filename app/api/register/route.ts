@@ -9,6 +9,8 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { fullName, email, phone, dietaryRequirements, transactionId } = reqBody;
 
+
+        // Check If User Already Registereds
         const registrant = await Registrant.findOne({ email });
         if (registrant) {
             return NextResponse.json({ error: "Email Already Registered" }, { status: 400 });
