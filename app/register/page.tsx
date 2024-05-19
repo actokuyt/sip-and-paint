@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Register() {
   return (
     <div className="flex items-center justify-center p-2 ">
-      <div className="md:w-[80%] md:mx-auto lg:w-[50%] mt-16 md:mt-24" >
+      <div className="md:w-[81%] md:mx-auto lg:w-[50%] mt-16 md:mt-24" >
         <div className="text-[#927383] bg- border border-gray-500 rounded mb-4 p-2">
           <span>Ticket Options</span>
           <div className="my-4 text-center w-[90%] mx-auto flex justify-between">
