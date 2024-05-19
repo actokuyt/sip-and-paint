@@ -9,7 +9,6 @@ interface ButtonType {
 }
 
 export default function Button({ text, link, styles }: ButtonType) {
-    console.log(link)
   const router = useRouter();
   return (
     <button

@@ -3,7 +3,7 @@ import { El_Messiri } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import MuiDrawer from "@/components/mui-drawer";
-import { StyledEngineProvider } from "@mui/material";
+import NavBar from "@/components/navbar";
 
 const messiri = El_Messiri({ subsets: ["latin"] });
 
@@ -18,9 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={messiri.className}>
+      <body className={`page-background ${messiri.className}`}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <MuiDrawer />
+            <NavBar/>
             {children}
         </AppRouterCacheProvider>
       </body>

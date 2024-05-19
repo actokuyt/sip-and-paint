@@ -4,12 +4,14 @@ import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+
 interface RegisterFormTypes {
   fullName: string;
   email: string;
   phone: string;
   dietaryRequirement: string;
   options: string;
+  transactionId: string;
 }
 
 export function RegistrationForm() {
@@ -19,8 +21,10 @@ export function RegistrationForm() {
     phone: "",
     dietaryRequirement: "",
     options: "",
+    transactionId: "",
   });
   const [submitState, setSubmitState] = React.useState("Submit");
+
 
   function handleInputChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,22 +36,35 @@ export function RegistrationForm() {
     }));
   }
 
+  function resetForm() {
+    setFormValues({
+      fullName: "",
+      email: "",
+      phone: "",
+      dietaryRequirement: "",
+      options: "",
+      transactionId: "",
+    });
+  }
+
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitState("Submitting...");
-    console.log(formValues);
     try {
       const response = await axios.post("/api/register", formValues);
-      Swal.fire("Success", "You have registered successfully", "success");
+      if (response.status === 200) {
+        Swal.fire("Success", "You have registered successfully", "success");
+        resetForm()
+      }
     } catch (error) {
-      Swal.fire("Error", "There was an error submitting the form", "error");
+      Swal.fire("Error", "There was an error submitting the form, Please check the details on the form.", "error");
     } finally {
       setSubmitState("Submit");
     }
   }
 
   return (
-    <form onSubmit={submit} className="grid grid-cols-1 gap- text-[#927383]">
+    <form onSubmit={submit} className="grid grid-cols-1 text-[#927383]">
       <label htmlFor="fullName" className="block font-semibold">
         Full Name
       </label>
@@ -92,49 +109,26 @@ export function RegistrationForm() {
       </label>
       <textarea
         placeholder="Dietary Requirements"
-        name="dietaryrequirements"
+        name="dietaryRequirement"
         rows={5}
         value={formValues.dietaryRequirement}
         onChange={handleInputChange}
         spellCheck={true}
         className="p-2 bg-transparent border border-gray-500 rounded mb-4"
       ></textarea>
-      <fieldset className="mb-4">
-        <legend className="block font-semibold mb-2">Options</legend>
-        <label className="mr-4">
-          <input
-            type="radio"
-            name="options"
-            value="standard"
-            checked={formValues.options === "standard"}
-            onChange={handleInputChange}
-            className="mr-2"
-          />
-          Standard
-        </label>
-        <label className="mr-4">
-          <input
-            type="radio"
-            name="options"
-            value="general"
-            checked={formValues.options === "general"}
-            onChange={handleInputChange}
-            className="mr-2"
-          />
-          General
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="options"
-            value="vip"
-            checked={formValues.options === "vip"}
-            onChange={handleInputChange}
-            className="mr-2"
-          />
-          VIP
-        </label>
-      </fieldset>
+     <label htmlFor="transactionId" className="block font-semibold">
+        Transaction Id
+      </label>
+      <input
+        type="text"
+        placeholder="Payment Transaction Id"
+        title="transactionId"
+        name="transactionId"
+        value={formValues.transactionId}
+        required
+        onChange={handleInputChange}
+        className="p-2 bg-transparent border border-gray-500 rounded mb-4"
+      />
       <button
         type="submit"
         className="w-2/5 mx-auto mt-8 border border-gray-500 p-2 rounded-lg"
