@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen p-2 text-gray-700">
+    <div className="flex flex-col items-center justify-center w-screen h-screen p-2 text-gray-700 md:w-[70%] md:mx-auto lg:-[50%]">
       <div className="text-center">
         <h1 className="text-xl font-bold underline mb-4">About Us</h1>
         <p className="mb-4">

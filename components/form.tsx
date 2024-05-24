@@ -213,7 +213,7 @@ export default function ContactForm () {
     try {
       const response = await axios.post("/api/contact", formValues);
       if (response.status === 200) {
-        Swal.fire("Success", "You have registered successfully", "success");
+        Swal.fire("Success", "Message Successfully Sent", "success");
         resetForm();
       }
     } catch (error) {

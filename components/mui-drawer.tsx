@@ -28,7 +28,7 @@ export default function MuiDrawer() {
     };
 
   return (
-    <div className='fixed top-0 bg-transparent w-full h-[2em] p-2 lg:hidden'>
+    <div className='fixed top-0 bg-transparent w-full h-[2em] p-2 md:hidden'>
       <React.Fragment>
         <Button onClick={toggleDrawer('top', true)} className='text-[#77586b] absolute right-0' ><Menu/></Button>
         <SwipeableDrawer

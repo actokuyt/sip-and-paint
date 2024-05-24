@@ -3,8 +3,8 @@ import ContactForm from "@/components/form";
 export default function Contact() {
 
   return (
-    <div className="p-2 text-gray-600">
-      <div className="mb-8">
+    <div className="flex flex-col justify-center lg:items-center md:h-screen p-2 text-gray-600 md:w-[70%] md:mx-auto lg:flex-row">
+      <div className="mb-8 lg:mr-8">
         <h1 className="text-xl font-bold underline mb-4 text-center">
           Find Us At
         </h1>
