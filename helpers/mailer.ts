@@ -13,17 +13,16 @@ interface NewRegistrant {
 export async function sendRegistrationEmail(newRegistrant: NewRegistrant) {
   try {
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      service: "gmail",
       auth: {
-        user: process.env.MAIL_TRAP_USER,
-        pass: process.env.MAIL_TRAP_PASS,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: newRegistrant.email,
-      to: "chibthankGod@gmail.com",
+      to: process.env.RECEIVING_EMAIL,
       subject: "New registration for Sip and Paint",
       html: `<p>
             Hey, ${
@@ -44,6 +43,7 @@ export async function sendRegistrationEmail(newRegistrant: NewRegistrant) {
     };
 
     const mailresponse = await transport.sendMail(mailOptions);
+    console.log(mailresponse)
     return mailresponse;
   } catch (error: any) {
     throw new Error(error.message);
@@ -60,17 +60,16 @@ interface ContactMail {
 export async function sendContactEmail(contactMail: ContactMail) {
   try {
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      service: "gmail",
       auth: {
-        user: process.env.MAIL_TRAP_USER,
-        pass: process.env.MAIL_TRAP_PASS,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: contactMail.email,
-      to: "chibthankGod@gmail.com",
+      to: process.env.RECEIVING_EMAIL,
       subject: "New Message from Sip and Paint",
       html: `<p>
             Full Name: ${contactMail.firstName} ${contactMail.lastName} <br>
