@@ -4,7 +4,7 @@ import Button from "@/components/button";
 export default function Home() {
   return (
     <div className="flex items-center justify-center w-screen h-screen p-2 ">
-      <div className="lg:w-[40%] mt-24">
+      <div className="lg:w-[40%] mt-">
         <img
           src="/logo.png"
           alt="logo"
@@ -12,11 +12,11 @@ export default function Home() {
         />
         <img src="/sipnpaint.png" className="w-3/5 mx-auto mb-8" />
         <img src="/welcome.png" className="w-4/5 mx-auto mb-10" />
-        <div className="button-background w-3/5 mx-auto mb-10">
+        <div className="button-background w-3/5 mx-auto mb-10 p-2">
           <Button
             text="click to register!"
             link="register"
-            styles="text-[#927383] text-center text-xl p-4 w-full mx-auto"
+            styles="text-[#927383] text-center text-xl p-4 w-full mx-auto "
           />
         </div>
         <ul className="flex justify-between text-[#927383] w-[50%] mx-auto mb-4">

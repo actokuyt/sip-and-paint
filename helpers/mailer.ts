@@ -4,14 +4,13 @@ interface NewRegistrant {
   fullName: string;
   email: string;
   phone: string;
-  dietaryRequirements: string;
+  homeAddress: string;
+  dateOfBirth: string;
+  dietaryRequirement: string;
   transactionId: string;
 }
 
-console.log(process.env.MAIL_TRAP_USER)
-console.log(process.env.MAIL_TRAP_PASS)
-
-export async function sendEmail(newRegistrant: NewRegistrant) {
+export async function sendRegistrationEmail(newRegistrant: NewRegistrant) {
   try {
     var transport = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
@@ -33,9 +32,11 @@ export async function sendEmail(newRegistrant: NewRegistrant) {
             Full Name: ${newRegistrant.fullName} <br>
             Email: ${newRegistrant.email} <br>
             Phone: ${newRegistrant.phone} <br>
+            Home Address: ${newRegistrant.homeAddress} <br>
+            Date Of Birth: ${newRegistrant.dateOfBirth} <br>
             Dietary Requirements: ${
-              newRegistrant.dietaryRequirements
-                ? newRegistrant.dietaryRequirements
+              newRegistrant.dietaryRequirement
+                ? newRegistrant.dietaryRequirement
                 : "No Dietary Prefrences"
             } <br>
             Payment Transaction Id : ${newRegistrant.transactionId}
@@ -44,7 +45,43 @@ export async function sendEmail(newRegistrant: NewRegistrant) {
 
     const mailresponse = await transport.sendMail(mailOptions);
     return mailresponse;
-  } catch (error:any) {
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+interface ContactMail {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+}
+
+export async function sendContactEmail(contactMail: ContactMail) {
+  try {
+    var transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: process.env.MAIL_TRAP_USER,
+        pass: process.env.MAIL_TRAP_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: contactMail.email,
+      to: "chibthankGod@gmail.com",
+      subject: "New Message from Sip and Paint",
+      html: `<p>
+            Full Name: ${contactMail.firstName} ${contactMail.lastName} <br>
+            Email: ${contactMail.email} <br>
+            Message: ${contactMail.message}
+            </p>`,
+    };
+
+    const mailresponse = await transport.sendMail(mailOptions);
+    return mailresponse;
+  } catch (error: any) {
     throw new Error(error.message);
   }
 }

@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect, Registrant } from "../../../dbconfig";
-import { sendEmail } from "@/helpers/mailer";
+import { sendRegistrationEmail } from "@/helpers/mailer";
 
 connect();
 
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { fullName, email, phone, dietaryRequirements, transactionId } = reqBody;
+        const { fullName, email, phone, homeAddress, dateOfBirth, dietaryRequirement, transactionId } = reqBody;
 
 
-        // Check If User Already Registereds
+        // Check If User Already Registered
         const registrant = await Registrant.findOne({ email });
         if (registrant) {
             return NextResponse.json({ error: "Email Already Registered" }, { status: 400 });
@@ -20,12 +20,14 @@ export async function POST(request: NextRequest) {
             fullName,
             email,
             phone,
-            dietaryRequirements,
+            homeAddress,
+            dateOfBirth,
+            dietaryRequirement,
             transactionId,
         };
 
         await Registrant.create(newRegistrant);
-        await sendEmail(newRegistrant);
+        await sendRegistrationEmail(newRegistrant);
 
         return NextResponse.json({ message: "Registration successful!" }, { status: 200 });
     } catch (error) {

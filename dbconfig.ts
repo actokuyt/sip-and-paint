@@ -36,6 +36,14 @@ const registrantSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a phone number"],
     },
+    homeAddress: {
+        type: String,
+        required: [true, "Please Provide Your Address"],
+    },
+    dateOfBirth: {
+        type: String,
+        required: [true, "Please Provide Your Date of Birth"]
+    },
     dietaryRequirements: {
         type: String,
     },
