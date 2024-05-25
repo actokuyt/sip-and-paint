@@ -43,7 +43,6 @@ export async function sendRegistrationEmail(newRegistrant: NewRegistrant) {
     };
 
     const mailresponse = await transport.sendMail(mailOptions);
-    console.log(mailresponse)
     return mailresponse;
   } catch (error: any) {
     throw new Error(error.message);

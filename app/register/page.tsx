@@ -21,7 +21,7 @@ export default function Register() {
               VIP
             </Link>
           </div>
-          <p className="">
+          <p className="font-bold">
             Please complete payment before submitting this form.{" "}
           </p>
         </div>
